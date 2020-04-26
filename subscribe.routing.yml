@@ -1,0 +1,15 @@
+subscribe.subscribe_list:
+  path: '/admin/config/development/subscribe_list'
+  defaults:
+    _form:  '\Drupal\subscribe\Form\SubscribeList'
+    _title: 'Vertical tab elements'
+  requirements:
+    _permission: 'administer content'
+
+subscribe.dialog_form:
+  path: '/subscribe/dialog_form'
+  defaults:
+    _form:  '\Drupal\subscribe\Form\DialogForm'
+    _title: 'Vertical tab elements'
+  requirements:
+    _permission: 'administer content'

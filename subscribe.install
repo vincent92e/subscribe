@@ -1,0 +1,27 @@
+<?php
+
+/**
+ *   Implements hook_schema().
+ */
+function subscribe_schema() {
+  $schema['subscribe_list'] = array(
+    'description' => 'Store list of email subscribers.',
+    'fields' => [
+      'uid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique id for subscribe',
+      ),
+      'email' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Store email of a person',
+      ),
+    ],
+    'primary key' => array('uid'),
+  );
+
+  return $schema;
+}
