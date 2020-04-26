@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * Implements hook_theme();
+ */
+function subscribe_theme() {
+  return array(
+    'subscribe_form' => array(
+      'render element' => 'form',
+      'template' => 'subscribe',
+      'path' => drupal_get_path('module', 'subscribe') . '/template',
+    ),
+  );
+}
