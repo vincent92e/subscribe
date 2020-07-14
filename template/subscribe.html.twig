@@ -1,0 +1,15 @@
+
+<div class="form-inline"><div class="input-group mb-2 col pr-0 form-inline">
+  <div class="input-group-prepend form-inline">
+    <div class="input-group-text"><i class="fa fa-envelope mr-2"></i>Email:</div>
+  </div>
+  {{ form.subscribe }}
+</div>
+{{ form.actions }}
+</div>
+{# -- Render any remaining elements, such as hidden inputs (token, form_id, etc) -- #}
+{{ form.form_token }}
+{{ form.form_build_id }}
+{{ form.form_id }}
+
+{{ form.message }}
