@@ -1,0 +1,6 @@
+subscribe.admin:
+  title: 'Subscribe List'
+  description: 'List of email subscribers'
+  parent: system.admin_config_development
+  route_name: subscribe.subscribe_list
+  weight: 100
