@@ -8,7 +8,7 @@ function subscribe_schema() {
     'description' => 'Store list of email subscribers.',
     'fields' => [
       'uid' => array(
-        'type' => 'serial',
+        'type' => 'serial', #Serial is used for auto increment only
         'not null' => TRUE,
         'description' => 'Primary Key: Unique id for subscribe',
       ),
