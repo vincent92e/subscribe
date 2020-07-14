@@ -31,28 +31,45 @@ class SubscribeForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $form['#prefix'] = '<div class="form-subscribe"><div class="container"><div class="row"><div class="col col-lg-3 title mb-2">'.t('Sign up for a newsletter').'</div><div class="col-sm-12 col-lg-6">';
+    // Add the core AJAX library.
+    $form['#attached']['library'][] = 'core/drupal.ajax';
+    $form['#attached']['library'][] = 'core/drupal.dialog.ajax';
+
+    $form['#prefix'] = '<div id="form-subscribe" class="form-subscribe"><div class="container"><div class="row"><div class="col col-lg-3 title mb-2">'.t('Sign up for a newsletter').'</div><div class="col-sm-12 col-lg-6">';
 
     // display field with custom html
     $form['subscribe'] = [
       '#type' => 'item',
       '#markup' => '<input type="text" name="subscribe" class="form-control" id="subscribe" placeholder="Your valid email address">',
       '#allowed_tags' => ['input',],
-      '#theme_wrappers' => array(),
+      '#theme_wrappers' => [],
+    ];
+
+    $form['message'] = [
+      '#type' => 'item',
+      '#markup' => '<div id="form-message"></div>',
+      '#theme_wrappers' => [],
     ];
 
     $form['actions'] = [
       '#type' => 'actions',
-      '#theme_wrappers' => array(),
+      '#theme_wrappers' => [],
     ];
 
     // Add a submit button that handles the submission of the form.
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
-      '#attributes' => array(
-        'class' => array('button', 'btn', 'btn-primary', 'mb-2', 'col-3', 'col-sm-2'),
-      ),
+      '#ajax' => [
+        'callback' => '::displayMessage',
+        'wrapper' => 'form-subscribe',
+        'progress' => [
+          'message' => '',
+        ],
+      ],
+      '#attributes' => [
+        'class' => ['button', 'btn', 'btn-primary', 'mb-2', 'col-3', 'col-sm-2'],
+      ],
     ];
 
     $form['#suffix'] = '</div></div></div></div>';
@@ -109,6 +126,16 @@ class SubscribeForm extends FormBase {
         'email' => $values['subscribe'],
       )
     )->execute();
+
+  }
+
+  public function displayMessage(array &$form, FormStateInterface $form_state) {
+
+    // Update form with message and return
+    $element = $form;
+    $element['message']['#markup'] = '<div id="form-message" class="form-message">Thank you! You are now subscribed.<i class="fa fa-times"></i></div>';
+
+    return $element;
 
   }
 
